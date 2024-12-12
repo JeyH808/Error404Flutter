@@ -30,6 +30,7 @@ dev_dependencies:
 flutter:
   assets:
     - lib/img/avt1.jpg
+    - lib/img/todo.jpg
     - lib/img/click.png
 
   uses-material-design: true

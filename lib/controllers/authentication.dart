@@ -4,9 +4,17 @@ import 'package:flutter/material.dart';
 import '../views/CompleteProfilePage.dart';
 import '../views/RegisPage.dart';
 import '../views/HomePage.dart';
+import '../views/WorkSchedulePage.dart';
 import 'package:error404project/views/LoginPage.dart'; // Import the LoginPage
 
 class NavigateController {
+  void navigateToWorkSchedule(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const WorkSchedulePage()),
+    );
+  }
+
   // Điều hướng đến trang Đăng ký
   void navigateToRegister(BuildContext context) {
     Navigator.push(
@@ -62,7 +70,6 @@ class FirebaseAuthService {
       return credential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        // Nếu email đã tồn tại, bạn có thể xử lý như sau
         print("Email đã tồn tại");
         return null;
       } else {
@@ -93,12 +100,11 @@ class FirebaseAuthService {
 
   // Đăng xuất người dùng và điều hướng đến trang WelcomePage
   Future<void> signOut(BuildContext context) async {
-    await _auth.signOut();  // Gọi phương thức đăng xuất từ Firebase
-    // Điều hướng đến trang WelcomePage và loại bỏ tất cả các trang trước đó trong ngăn xếp
+    await _auth.signOut();
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => WelcomePage()), // Trang chào mừng
-          (Route<dynamic> route) => false,  // Loại bỏ tất cả các trang trước đó
+      MaterialPageRoute(builder: (context) => WelcomePage()),
+          (Route<dynamic> route) => false,
     );
   }
 

@@ -1,8 +1,9 @@
 import 'package:error404project/views/CompleteProfilePage.dart';
+import 'package:error404project/views/WorkSchedulePage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'firebase_config.dart'; // Import tệp cấu hình Firebase
-import 'views/WelcomePage.dart'; // Trang khởi động của bạn
+import 'firebase_config.dart';
+import 'views/WelcomePage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

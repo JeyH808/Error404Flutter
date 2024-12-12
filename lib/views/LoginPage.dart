@@ -31,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
       User? user = await authService.signInWithEmailAndPassword(email, password);
 
       if (user != null) {
-        // Nếu đăng nhập thành công, điều hướng đến trang HomePage
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
@@ -54,8 +53,8 @@ class _LoginPageState extends State<LoginPage> {
     final navigateController = NavigateController();
 
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Thay đổi kích thước màn hình khi bàn phím xuất hiện
-      body: SingleChildScrollView( // Cho phép cuộn màn hình khi bàn phím xuất hiện
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,14 +65,14 @@ class _LoginPageState extends State<LoginPage> {
                 IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.orange),
                   onPressed: () {
-                    navigateController.navigateToWelcome(context); // Sử dụng controller để điều hướng
+                    navigateController.navigateToWelcome(context);
                   },
                 ),
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 10.0), // Thêm khoảng cách từ trên
+                      padding: EdgeInsets.only(top: 10.0),
                       child: Text(
                         'HRM',
                         style: TextStyle(
@@ -92,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(width: 48), // khoảng trống để căn giữa icon và text phía bên phải
+                SizedBox(width: 48),
               ],
             ),
             const SizedBox(height: 20),
@@ -132,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 10),
-            const Center( // Center align the forgot password text
+            const Center(
               child: Text(
                 'Bạn quên mật khẩu? Lấy lại mật khẩu',
                 style: TextStyle(
@@ -143,13 +142,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             SizedBox(
-              width: double.infinity, // Đặt chiều rộng bằng chiều rộng của container
+              width: double.infinity,
               child: ElevatedButton(
-                onPressed: _login, // Gọi hàm đăng nhập
+                onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0), // Điều chỉnh chiều cao
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8), // Bo góc nhẹ
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   foregroundColor: Colors.white,
                   backgroundColor: const Color(0xFF166FB1),
@@ -157,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('Đăng nhập'),
               ),
             ),
-            if (errorMessage != null) // Hiển thị thông báo lỗi dưới các trường nhập liệu
+            if (errorMessage != null)
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(

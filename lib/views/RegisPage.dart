@@ -31,7 +31,6 @@ class _RegisterPageState extends State<RegisterPage> {
     String password = _passwordController.text.trim();
     String confirmPassword = _confirmPasswordController.text.trim();
 
-    // Kiểm tra các trường nhập liệu có trống không
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       setState(() {
         _errorMessage = "Điền đầy đủ thông tin!";
@@ -39,7 +38,6 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    // Kiểm tra định dạng email
     if (!RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").hasMatch(email)) {
       setState(() {
         _errorMessage = "Định dạng email không chính xác!";
@@ -47,7 +45,6 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    // Kiểm tra mật khẩu
     if (password.length < 6) {
       setState(() {
         _errorMessage = "Mật khẩu phải có ít nhất 6 kí tự!";
@@ -55,7 +52,6 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    // Kiểm tra mật khẩu và xác nhận mật khẩu
     if (password != confirmPassword) {
       setState(() {
         _errorMessage = "Mật khẩu không khớp!";
@@ -66,13 +62,11 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       final user = await _authService.signUpWithEmailAndPassword(email, password);
       if (user != null) {
-        // Tạo tài liệu người dùng trong Firestore với trường isProfileComplete ban đầu là false
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           'email': email,
           'isProfileComplete': false,
         });
 
-        // Đăng ký thành công, điều hướng đến CompleteProfilePage
         _navigateController.navigateToComplete(context);
       } else {
         setState(() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../controllers/authentication.dart';
 import '../widgets/BottomNavBarWidget.dart';
 import '../widgets/GridHomePage.dart';
 
@@ -76,7 +77,7 @@ class HomePage extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     final currentUser = FirebaseAuth.instance.currentUser;
-
+    final navigateController = NavigateController();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -274,14 +275,16 @@ class HomePage extends StatelessWidget {
                             crossAxisCount: 2,
                             childAspectRatio: 3 / 2,
                             shrinkWrap: true,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
                             children: [
                               GridItem(
                                 icon: Icons.calendar_today,
                                 title: 'Lịch làm việc',
                                 subtitle: 'Ca làm việc và thay ca',
-                                onTap: () {},
+                                onTap: () {
+                                  navigateController.navigateToWorkSchedule(context);
+                                },
                               ),
                               GridItem(
                                 icon: Icons.beach_access,
@@ -321,12 +324,21 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           const Center(
-                            child: Text(
-                              'Không có công việc cần làm',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image(
+                                  image: AssetImage('lib/img/todo.jpg'),
+                                ),
+                                SizedBox(height: 10), // Khoảng cách giữa ảnh và chữ
+                                Text(
+                                  'Không có công việc cần làm',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 20),
